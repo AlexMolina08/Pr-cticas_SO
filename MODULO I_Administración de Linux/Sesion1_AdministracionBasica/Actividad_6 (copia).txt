@@ -1,0 +1,15 @@
+Actividad 1.7. Archivo del kernel de Linux
+------------------------------------------------------------------------------------------------------------------
+• Utilizando la orden (find) que ya conoces para la búsqueda de archivos en el sistema de
+archivos, anota el nombre absoluto del archivo del kernel de Linux que se ha cargado en
+el sistema operativo que estás usando en el laboratorio de prácticas para acceso modo
+root.
+------------------------------------------------------------------------------------------------------------------
+
+#En el S.O host ejecuto find sobre el kernel que nos hemos descargado
+
+>find / -name kernel32-3.0.4
+    
+    /tmp/kernel32-3.0.4
+
+#Vemos que está en /tmp

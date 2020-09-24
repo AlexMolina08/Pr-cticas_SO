@@ -1,0 +1,49 @@
+Actividad 1.6. Creación de grupos
+------------------------------------------------------------------------------------------------------------------
+1. Crea un par de grupos y asignáselos a algunos de los usuarios de tu sistema.
+2. ¿Qué información devuelve la orden id si estás conectado como root?
+------------------------------------------------------------------------------------------------------------------
+
+1)
+--------
+
+>groupadd ec
+#Comprobamos que se ha creado correctamente el grupo mirando en /etc/group el formato es : (nombre):pass:gid
+>cat /etc/group | grep ec
+    ec:x:502:
+#Cambiamos la contraseña
+>gpasswd ec
+
+#Creamos otro grupo
+>groupadd so
+
+#Ahora se lo asignamos a alex el de ec y a maria el de so
+>gpasswd -a alex ec
+    Adding user alex to group ec
+
+#Vemos como efectivamente se ha añadido
+>cat /etc/group | grep alex
+    ec:x:502:alex
+
+>gpasswd -a maria so
+    Adding user maria to group so
+
+>cat /etc/group | grep maria
+    so:x:504:maria
+
+
+----------
+2)
+----------
+#Me conecto como root y ejecuto id
+#Vemos que el resultado es la informacion del usuario root (su uid , gid y a los grupos que pertenece el mismo)
+
+>id
+    uid=0(root) gid=0(root) groups=0(root),1(bin),2(daemon),3(sys),4(adm),6(disk),10(wheel)
+
+
+
+
+
+
+

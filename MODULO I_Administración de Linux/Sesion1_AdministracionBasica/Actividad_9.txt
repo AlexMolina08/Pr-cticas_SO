@@ -1,0 +1,17 @@
+Actividad 1.9. Información de los SAs
+------------------------------------------------------------------------------------------------------------------
+Los archivos /etc/fstab y /etc/mtab muestran información sobre los sistemas de archivos que
+se encuentran montados en el sistema. ¿Cuál es la diferencia entre la información que muestra
+cada uno de ellos?
+------------------------------------------------------------------------------------------------------------------
+
+/etc/fstab contiene todos los sistemas de archivos disponibles EN EL MOMENTO DEL ARRANQUE.  
+
+/etc/mtab contine todos los sitemas de archivos disponibles AHORA MISMO.
+
+Ambos archivos siguen el mismo formato (explicado en el ejercicio siguiente)
+
+
+
+
+

@@ -1,0 +1,17 @@
+Actividad 1.11. Archivos de información para los SAs
+------------------------------------------------------------------------------------------------------------------
+Compara la información que contienen los cuatro archivos de texto que se han presentado en
+este apartado (/etc/fstab, /etc/mtab, /proc/filesystems y /proc/mounts). Describe en un
+párrafo para qué te sirve la información que registra cada archivo.
+------------------------------------------------------------------------------------------------------------------
+
+    /etc/fstab : Contine todos los sistemas de archivos que estaban en el arranque
+    /etc/mtab : Contine todos los sistemas de archivos que están actualmente montados (es una mera copia de /proc/mounts o en su defecto un enlace simbólico)
+    
+  En /proc tenemos toda la información en tiempo real del kernel del S.O , por tanto:
+    
+    /proc/filesystems : Contiene todos los sistemas de arquivos QUE SOPORTA EL KERNEL
+    /proc/mounts : Contiene todos los sistemas de archivos que están ACTUALMENTE MONTADOS
+
+
+  Importante entender que todos los archivos de /proc son los más actualizados , pues está comunicado directamente con el kernel del S.O

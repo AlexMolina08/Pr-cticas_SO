@@ -1,0 +1,39 @@
+Actividad 1.10 Información de los SAs
+------------------------------------------------------------------------------------------------------------------
+Edita el archivo /etc/fstab del sistema de archivos que estás utilizando en modo root y anota y
+describe la información que tiene registrada. Si no conoces alguna opción puedes consultar el
+manual en línea: man fstab.
+------------------------------------------------------------------------------------------------------------------
+En ambos archivos , cada línea se corresponde con un sistema de archivos , está separada en columnas que expresan:
+
+    1. Dispositivo montado (como /dev/sda5 , tmpfs , tmp , ...)
+
+    2. Punto de montaje (como "/" (que es la raíz) )
+
+    3. Sistema de Archivos (como tmpfs que es un sistema de archivos volátil , ext2 , ext3 , ext4 , sysfs , ...)
+
+    4. Opciones de montaje , que pueden ser:
+
+            defaults
+                     use  default  options: rw, suid, dev, exec, auto, nouser,
+                     and async.
+
+             noauto do not mount when "mount -a"  is  given  (e.g.,  at  boot
+                     time)
+
+             user   allow a user to mount
+
+             owner  allow device owner to mount
+
+             comment
+                     or x-<name> for use by fstab-maintaining programs
+
+              nofail do  not  report errors for this device if it does not ex‐
+                     ist.
+
+
+    5. valor usado por el comando dump (0 para ignorarlo)
+
+    6. valor usado por el comando fsck (0 para ignorarlo)
+
+/etc/mtab tiene valores sin significado en las lineas 5 y 6 para mantener el mismo formato que /etc/fstab

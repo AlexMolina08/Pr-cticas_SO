@@ -1,0 +1,20 @@
+Actividad 1.4. Archivo /etc/passwd
+------------------------------------------------------------------------------------------------------------------
+Visualiza el archivo /etc/passwd e indica cual es el formato de cada línea de dicho archivo. Para
+ello también puedes consultar el man o info de Linux. ¿Quién es el propietario de este archivo y
+cuáles son sus permisos?
+------------------------------------------------------------------------------------------------------------------
+
+#Primero vemos el propietario del archivo , y observamos que es el usuario root
+#tiene permisos de lectura y escritura
+>ls -l /etc/passwd
+    -rw-r--r-- 1 root root 879 Sep 24 09:03 /etc/passwd
+
+#Vamos a ver el formato de cada usuario , por ejemplo , uno de los que hemos creado en el ej. anterior
+
+>cat /etc/passwd | grep alex
+    alex:x:501:501::/home/alex:/bin/bash
+    (nombre):(password):(uid):(gid):(comentarior adicionales):(carpeta home):(itérprete de ordenes)
+
+
+

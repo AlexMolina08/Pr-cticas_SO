@@ -1,0 +1,109 @@
+Actividad 1.3. Creación de usuarios
+----------------------------------
+    1.  Utiliza el manual en línea para leer la sintaxis completa de la utilidad para creación de
+    cuentas y crea dos o tres usuarios en tu sistema cambiando alguno de los valores por
+    defecto.
+
+    2.  Elimina alguno de ellos y comprueba que “rastro” ha dejado la cuenta recién eliminada en
+    el sistema.
+
+    3.  Entra (orden su) en el sistema como uno de estos usuarios que has creado y mira qué
+    archivos tiene en su directorio home. La orden sudo permite cambiar el modo de trabajo a 
+    modo root específicamente para ejecutar una orden con privilegios de supervisor y tras su
+    ejecución continuar con los privilegios del usuario que abrió la sesión.
+
+-------------------------------------
+1)
+-----
+
+#Creamos un usuario llamado alex con un uid y gid 501
+>useradd -u 501 alexç
+#Comprobamos en los archivos correspondientes que el usuario se ha creado correctamente
+>cat /etc/passwd | grep alex
+    alex:x:5001:5001::/home/alex:/bin/bash
+>cat /etc/shadow | grep alex
+    alex:!!:18529:0:99999:7::
+>cat /etc/group | grep alex
+    alex:x:5001:
+>ls /home
+    alex
+ 
+#Creamos un usuario llamado paco con los valores por defecto
+>useradd paco 
+#Modificamos la fecha de expiracion de la cuenta
+>usermod -e 05-09-21 paco
+#Añadimos el user paco al grupo de alex también
+usermod -G alex paco
+
+#Creamos un archivo de texto plano y creamos dos nuevos usuarios utilizando el formato de /etc/passwd
+    (/root/usuarios.txt)
+    andrea:x:505:505::/home/andrea:/bin/bash
+    maria:x:506:506::/home/maria:/bin/bash
+#ejecutamos newusers 
+>newusers usuarios.txt
+
+#vemos que todo ha funcionado como debía viendo los archivos de /etc
+
+#/etc/passwd
+...
+
+alex:x:5001:5001::/home/alex:/bin/bash
+paco:x:5002:5002::/home/paco:/bin/bash
+andrea:x:505:505::/home/andrea:/bin/bash
+maria:x:506:506::/home/maria:/bin/bash
+
+#/etc/shadow
+...
+
+alex:!!:18529:0:99999:7:::
+paco:!!:18529:0:99999:7::13047:
+andrea:$6$LRhgT/doX01$DKaxLVQTRKm7Yj8kO3K0Ps4bRBpalgls/nxFznZItZ2uFsWPRFETgtMLp2udfjeb/GhivpzBMEb2uTYQWzIR4/:18529:0:99999:7:::
+maria:$6$NYt/sjvzCF/NH$NTfzveNRoDnUahbD1X39smo2oboS/N/9lGpVsjzAl6WoOt6zn1EkNT7Ko87oqedFvhnuNWl3bx.Z5Yx.9qms70:18529:0:99999:7:::
+
+#/etc/group
+...
+
+alex:x:5001:paco
+paco:x:5002:
+andrea:x:505:
+maria:x:506:
+
+--------------------
+2
+----------------------
+#Ahora eliminamos el usuario maria
+>userdel maria
+#en passwd , shadow y group se ha borrado el ratro pero no se ha borrado su carpeta personal
+>ls /home
+    alex paco andrea maria
+#la borramos y acabamos con el rastro de este usuario borrado
+>rmdir maria
+
+--------------------------
+3
+---------------------------
+#eliminamos la contraseña de alex por defecto (en shadows se pone !!) para facilitarnos ir y volver al root
+>passwd -d alex
+>su alex
+>cd
+#Hacemos ls en la carpeta principal y vemos que tenemos los archivos copiados de /etc/skel además de .(dir.actual) y ..(dir.anterior)
+    drwx------ 2 alex alex 4.0K Sep 24 09:03 .
+    drwxr-xr-x 3 root root 4.0K Sep 24 09:03 ..
+    -rw-r--r-- 1 alex alex   18 Jun 22  2011 .bash_logout
+    -rw-r--r-- 1 alex alex  176 Jun 22  2011 .bash_profile
+    -rw-r--r-- 1 alex alex  124 Jun 22  2011 .bashrc
+
+
+
+
+
+
+
+                                     
+
+
+
+
+
+
+

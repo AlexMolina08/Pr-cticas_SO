@@ -1,0 +1,7 @@
+Actividad 1.8. Organización del SA
+------------------------------------------------------------------------------------------------------------------
+Un programa que se ejecuta en modo root, ¿dónde podría guardar la información temporal de
+forma que ésta se mantuviese entre arranques del sistema?
+------------------------------------------------------------------------------------------------------------------
+
+La información temporal que se mantiene entre arranques se almacena en /var/tmp

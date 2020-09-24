@@ -1,0 +1,48 @@
+Visualiza el contenido de los dos archivos anteriores y comprueba cuáles son las opciones por
+defecto que tendría un usuario que se creara en nuestro sistema. A continuación, crea una
+cuenta de usuario y visualiza el contenido de los archivos /etc/passwd y /etc/group, y el directorio /home para comprobar que los nuevos datos se han rellenado conforme a la
+especificación tomada de /etc/default/useradd y /etc/login.defs.
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+#Visualizamos el contenido de /etc/default/useradd y /etc/login.defs
+>cat /etc/default/useradd 
+
+    GROUP=100 <-- Group por defecto
+    HOME=/home <-- donde se ubica la carpeta del usuario
+    INACTIVE=-1
+    EXPIRE=
+    SHELL=/bin/bash
+    SKEL=/etc/skel
+    CREATE_MAIL_SPOOL=yes
+
+>cat /etc/login.defs
+
+    #Aqui se establece los parametros de antiguedad de la password
+    PASS_MAX_DAYS	99999
+    PASS_MIN_DAYS	0
+    PASS_MIN_LEN	5
+    PASS_WARN_AGE	7
+    #Por defecto se crea home 
+    CREATE_HOME	yes
+    #UID minimo y maximo
+    UID_MIN			  500
+    UID_MAX			60000
+
+
+#CREO NUEVO USER 
+>useradd alex
+#Imprimimos lo que hayu en passwd y vemos que coincide con lo que habia en /etc/default/useradd y login.defs
+>cat /etc/passwd
+    user:pass:uid:gid:(comentarios adicionales):homeFolder:bashProgram    
+    alex:x:500:500::/home/alex:/bin/bash
+>cat /etc/group
+user:pass:GID:UsuariosQueTambienPertenecenAestegrupo
+alex:x:500:
+>cat /etc/shadow
+                user:passENcripted:Diasdesde1970quenosecambialapass:diasquelacontraseñaesvalida:diasantesdecaducar:diasdespuesdecaducarquelacuentasedeshabilita:fechacaducidadtras1970
+    alex:!!:18527:0:99999:7:::
+ 
+
+

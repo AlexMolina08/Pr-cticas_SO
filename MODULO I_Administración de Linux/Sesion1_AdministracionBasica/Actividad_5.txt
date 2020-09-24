@@ -1,0 +1,17 @@
+Actividad 1.5. Archivo /etc/shadow
+------------------------------------------------------------------------------------------------------------------
+Visualiza el archivo /etc/shadow desde un usuario distinto al root ¿Te da algún problema?
+¿Sabes por qué? Intenta averiguarlo.
+------------------------------------------------------------------------------------------------------------------
+
+>su alex
+
+#Al intentar consultarlo nos dice que no hay permisos
+>cat /etc/shadow
+    cat: /etc/shadow: Permission denied
+
+#Al ver los permisos de alex en este archivo obtenemos la respuesta : No tiene ningun permiso (ni de lectura ni de escritura)
+>ls -l /etc/shadow
+    ---------- 1 root root 513 Sep 24 09:03 /etc/shadow
+
+ 
