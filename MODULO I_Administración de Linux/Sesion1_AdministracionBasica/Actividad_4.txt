@@ -7,7 +7,7 @@ cuáles son sus permisos?
 
 #Primero vemos el propietario del archivo , y observamos que es el usuario root
 #tiene permisos de lectura y escritura
->ls -l /etc/passwd
+>ls -l /etc/passwd 
     -rw-r--r-- 1 root root 879 Sep 24 09:03 /etc/passwd
 
 #Vamos a ver el formato de cada usuario , por ejemplo , uno de los que hemos creado en el ej. anterior
