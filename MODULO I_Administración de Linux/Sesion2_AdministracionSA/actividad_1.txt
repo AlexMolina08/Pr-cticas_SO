@@ -1,0 +1,63 @@
+Actividad 2.1. Partición de un dispositivo: “USB pen drive” o “memory stick”
+------------------------------------------------------------------------------------------------------------------
+utilizaremos un dispositivo USB de tipo “pen drive” para establecer
+particiones. Vamos a crear una tabla de particiones en las que se van a definir dos particiones
+primarias que se configuraran para albergar dos sistemas de archivos tipo linux, de manera que
+la primera algergará un SA ext3 y la segunda un ext4. Ambas serán particiones tipo Linux 0x83.
+El tamaño de las particiones queda a vuestra libre elección pero por lo menos deberían tener
+512 MB.
+Como las particiones que vamos a hacer no van a ser excesivamente grandes vamos a utilizar la
+herramienta fdisk 2 . Esta orden se puede manejar básicamente como un programa guiado por
+menús para la creación y manipulación de la tabla de particiones. Para poder actuar sobre el pen
+drive necesitamos saber que existe un archivo especial de dispositivo que actua como interfaz
+para el dispositivo físico (<dispositivo>), por ejemplo, /dev/sda 3 representa el dispositivo de
+almacenamiento secundario sobre el que queremos trabajar. La <particion> es un
+<dispositivo> seguido de un número de partición (comenzando por el 1), p.e. /dev/sda2.
+A continuación vamos a describir cómo llevaremos a cabo en las aulas el procedimiento para
+poder realizar la partición de un dispositivo de almacenamiento secundario. Vamos a distinguir
+dos procedimientos: partición de un dispositivo simulado mediante un archivo especial de
+dispositivo y partición de un pen drive.
+------------------------------------------------------------------------------------------------------------------
+
+
+****************************************************************************************
+A) Preparación previa a la partición de un dispositivo simulado mediante un archivo
+especial de dispositivo.
+****************************************************************************************
+
+    Vamos a simular un dispositivo con un archivo /dev/loop 
+
+    a) Crea los archivos /dev/loop0 y /dev/loop1, si no se encuentran en el sistema (consultar devices.txt si hay dudas) :
+
+            >mknod /dev/loop0 b 7 0
+            
+            >mknod /dev/loop1 b 7 1
+
+
+    b) Crea un archivo de 20 MB y otro de 30 MB en tu sistema de archivos :
+
+            >dd if=/dev/zero of=/root/archivo_SA20 bs=2k count=10000 (2kB * 10.000bloques = 2MB)
+            
+            >dd if=/dev/zero of=/root/archivo_SA30 bs=3k count=10000 (3kB * 10.000bloques = 3MB)
+
+    c) Asociar un archivo de dispositivo loop a cada uno de los archivos que acabas de crear. De esta forma el “disco virtual” que representa el    archivo pasará a estar asociado al archivo de dispositivo /dev/loop0 y /dev/loop1
+
+            > losetup /dev/loop0 /root/archivo_SA20
+            > losetup /dev/loop1 /root/archivo_SA3
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -20,7 +20,7 @@ Partición de dispositivos de almacenamiento secundario
     
     *) PARTICION EXTENDIDA : Particion primaria que almacena lógicas (tipo de particion 0x05 , comprobable con /sbin/sfdisk -T | grep 5)
     
-    *) PARTICION SWAP : Es una particion lógica donde se almacenan datos temporales para 	    reducir uso de la RAM del sistema
+    *) PARTICION SWAP : Es una particion lógica donde se almacenan datos temporales para reducir uso de la RAM del sistema
     
     
     *) CONFIGURACIÓN DE PARTICIONES MÍNIMAS (para dispositivo almacenamiento secundario): necesito

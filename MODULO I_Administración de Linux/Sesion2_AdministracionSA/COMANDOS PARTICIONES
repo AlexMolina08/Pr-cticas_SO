@@ -1,0 +1,73 @@
+--------------
+    Crear particion
+--------------
+1 ) mknod : Sirve para crear archivos de dispositivo (device files) del tipo /dev/sda1 , /dev/loop2 , ...
+    
+       mknod <nombre-dispositivo> <tipo-dispositivo> <major-number> <minor-number>
+
+            <nombre-dispositivo> : debe empezar por /dev (/dev/loop1 , /dev/sda2 , ...)
+            <tipo-dispositivo> : puede ser
+                                    
+                                 *)tipo block (b) => dispositivos que almacenan (cd-roms , ssd , pendrive , ...)
+                                 *)tipo caracter (c) => dispositivos que no almacenan
+
+            <major-number> : tipo de dispositivo
+            <mino-number> : subtipo
+
+
+2) dd : Sirve para convertir y copiar archivos (en nuestro caso lo usamos para crear un archivo vacio)
+
+    dd if=<archivo-entrada> of=<archivo-salida> bs=<tamaño-bloque> count=<bloques-a-copiar>
+
+        bs=<tamaño-bloque> : Establece el tamaño de bloque del input y output al especificado (p.ej bs = 2k es un tamaño de bloque de 2KB)
+        count = <bloques> : Dice cuantos bloques copiar del input al output (p.ej count = 10000 copiará 10.000 bloques del input file) 
+
+
+    EJEMPLO: dd if = /dev/zero of=/root/archivo_SA20 bs = 2k count = 10000
+
+            Esto copia del archivo /dev/zero (que no es más que un archivo con nulls) 10.000 bloques de tamaño 2KB por lo que el tamaño total del archivo es
+            20.000KB que son 20MB
+
+
+3) losetup : asociar device files loop a un archivo
+
+    losetup <device_file> <virtual_device_file>
+
+
+4) fdisk
+
+        fdisk -l /dev/loop0 (consultar configuracion disco virtual /dev/loop0)
+
+
+----------------
+Crear SA
+---------------
+
+1) saber SA disponibles : ls /sbin/mkfs*
+        
+    >ls /sbin/mkfs*
+
+
+        /sbin/mkfs  /sbin/mkfs.cramfs  /sbin/mkfs.ext2  /sbin/mkfs.ext3  /sbin/mkfs.ext4  /sbin/mkfs.ext4dev
+
+
+2) mke2fs : Sirve para crear SA ext3  y ext4 , sus opciones son:
+
+        -L (nombre de la etiqueta)
+        -t (tipo de sistema de archivos , ext3 o ext4)
+        
+    EJEMPLO:
+        mke2fs -L LABEL_ext3 -t ext3 /dev/loop0
+
+
+
+
+
+
+
+
+
+
+
+
+
