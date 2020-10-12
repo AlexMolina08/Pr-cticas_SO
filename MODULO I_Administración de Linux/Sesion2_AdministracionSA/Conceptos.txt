@@ -1,0 +1,49 @@
+------------------------------------------------------
+------------------------------------------------------
+Partición de dispositivos de almacenamiento secundario
+------------------------------------------------------
+------------------------------------------------------
+
+    *)	Para que el SO pueda trabajar con un dispositivo secundario (usb , ssd , etc) tenemos que hacer una PARTICIÓN DE DISCO en dicho dispositivo secundario.
+	
+    *)	Sector: es la unidad mínima de almacenamiento de información en un dispositivo de almacenamiento secundario. (Tam. sectores comunes: 512, 1024, 2048 y 4096 bytes según dispositivo)
+    
+    *) Disco Lógico : Conjunto de Sectores que forman la partición del dispositivo externo.
+    
+    *) Etiqueta (/sbin/sfdisk -T para ver todos los tipos de particiones asociados los codigos) : Cuando creamos una particion hay que asociarle una etiqueta . Indica el tipo de SA que va a alojar la partición. 
+    
+    *) PARTICIÓNES PRIMARIAS : Son las divisones principales del disco. SOLO PUEDE HABER 4 COMO 	  MÁXIMO
+    
+    *) Un USB nuevo y formateado, consiste, en realidad, en una partición primaria que ocupa 	todo el espacio del disco y posee un sistema de archivos
+    	
+    *) PARTICIÓN LÓGICA : Son particiones en las que la partición primaria puede dividirse. Así podemos tener más de 4 particiones.
+    
+    *) PARTICION EXTENDIDA : Particion primaria que almacena lógicas (tipo de particion 0x05 , comprobable con /sbin/sfdisk -T | grep 5)
+    
+    *) PARTICION SWAP : Es una particion lógica donde se almacenan datos temporales para 	    reducir uso de la RAM del sistema
+    
+    
+    *) CONFIGURACIÓN DE PARTICIONES MÍNIMAS (para dispositivo almacenamiento secundario): necesito
+       --------------------------------------------------------------------------------------------
+            Para los secundarios de arranque: 
+            ---------------------------------           	
+                +) Una particion primaria
+               	+) Una o mas particiones swap
+            
+            Para los secundarios que no son de aranque: 
+            ---------------------------------           	
+                +) Una particion primaria o más
+                +) Ninguna o las que quieras particiones swap
+
+    *) Directorios FHS que deberían estar en una partición aparte
+    --------------------------------------------------------------
+            +) /home : Para limitar espacio almacenamiento de los usuarios
+
+            +) /usr : Aqui se almacenan la mayoria de los ejecutables
+
+            +) /var : Almacena directorios SPOOL (/var/spool) , /var/log , etc.. basicamente estan los archivos donde so escribe datos.
+                      Normalente todos los servidores con linux tienen esta carpeta como una particion independiente
+       	
+       	
+    
+    
