@@ -87,6 +87,29 @@ MONTAR SISTEMA DE ARCHIVOS
 
 
 
+------------------------
+GESTOR DE PAQUETES
+------------------------
+
+1) yum - gestor de paquetes RPM
+
+    yum list : Lista los paquetes disponibles en los repositorios para su instalación
+    yum list installed
+    yum list updates
+    yum install <nombre-paquete>
+    yum update
+    yum remove <nombre-paquete>
+    yum --help | more
+
+    
+
+
+    
+
+
+
+
+
 
 
 

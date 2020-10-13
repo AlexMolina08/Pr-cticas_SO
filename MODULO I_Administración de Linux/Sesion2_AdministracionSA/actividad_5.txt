@@ -1,0 +1,11 @@
+Actividad 2.5. Automontaje de Sistemas de Archivos
+------------------------------------------------------------------------------------------------------------------
+Escribe las dos líneas necesarias en el archivo /etc/fstab para que se monten automáticamente
+nuestros dos SA en el arranque del sistema con los mismos requisitos que se han pedido en la
+Actividad 2.4.
+------------------------------------------------------------------------------------------------------------------
+
+/dev/loop0 /mnt/SA_ext3 ext3 auto,ro 0 0
+/dev/loop1 /mnt/LABEL_ext4 ext4 auto,dirsync 0 0
+
+(pudiendo obviar la función auto , ya que por defecto , al arrancar el sistema se monta todo lo que haya en el archivo /etc/fstab)

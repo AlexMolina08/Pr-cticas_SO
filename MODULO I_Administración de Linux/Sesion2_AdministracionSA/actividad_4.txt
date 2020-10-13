@@ -10,7 +10,7 @@ cumplas los siguientes requisitos:
     y debe tener sincronizadas sus operaciones de E/S de modificación de directorios.
 ------------------------------------------------------------------------------------------------------------------
 
-a) mount -t <type> -L <device file-label> -r <punto de montaje>
+ mount -t <type> -L <device file-label> -r <punto de montaje>
 
     -r : para hacerlo read-only
     -L :para montar el SA con esa etiqueta (se puede poner el nombre del device file como /dev/loop y omitir -L)
@@ -22,10 +22,17 @@ a) mount -t <type> -L <device file-label> -r <punto de montaje>
 
 
 
-    Creamos la carpeta que va a ser nuestro punto de montaje y montamos nuestro sistema de archivos 
+a) Creamos la carpeta que va a ser nuestro punto de montaje y montamos nuestro sistema de archivos 
 
        > mkdir /mnt/SA_ext3
        > mount -L LABEL_ext3 -r /mnt/SA_ext3
+        o tambien podemos usar:        
+       > mount /dev/loop0 -o ro /mont/SA_ext3
+
+b) Creamos la carpeta que va a ser nuestro punto de montaje y montamos nuestro sistema de archivos 
+
+    > mkdir /mnt/SA_ext4
+    > mount -L LABEL_ext4 -o dirsync /mnt/SA_ext4
 
     
 

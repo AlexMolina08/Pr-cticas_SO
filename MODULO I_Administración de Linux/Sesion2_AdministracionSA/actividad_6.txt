@@ -1,0 +1,10 @@
+Actividad 2.6. Repositorios de paquetes
+------------------------------------------------------------------------------------------------------------------
+Accede a los sitios web especializados que ofrecen software para sistemas operativos Linux y
+enumera las principales características de cada uno de ellos en base, por ejemplo, a si contiene
+software abierto y/o propietario, tipos de aplicaciones disponibles, tamaño del sitio en cuanto a
+la cantidad de software que mantiene, y otras características que considere interesantes.
+------------------------------------------------------------------------------------------------------------------
+
+
+    ** MIRAR EN INTERNET **
