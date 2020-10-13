@@ -1,0 +1,31 @@
+Actividad 2.4. Creación de sistemas de archivos
+------------------------------------------------------------------------------------------------------------------
+  Utiliza el manual en línea para descubrir la forma de montar nuestros SAs de manera que
+cumplas los siguientes requisitos:
+
+    a) El SA etiquetado como LABEL_ext3 debe estar montado en el directorio /mnt/SA_ext3 y
+    en modo de solo lectura.
+
+    b) El SA etiquetado como LABEL_ext4 debe estar montado en el directorio /mnt/LABEL_ext4
+    y debe tener sincronizadas sus operaciones de E/S de modificación de directorios.
+------------------------------------------------------------------------------------------------------------------
+
+a) mount -t <type> -L <device file-label> -r <punto de montaje>
+
+    -r : para hacerlo read-only
+    -L :para montar el SA con esa etiqueta (se puede poner el nombre del device file como /dev/loop y omitir -L)
+    -o : especificar más opciones del montaje
+
+            -o async : todas las operaciones de E/S sobre el nuevo SA deben hacerse de forma asíncrona 
+            -o dirsync : todas las actualizaciones de los directorios del SA se deben hacer de forma síncrona. Es decir , deben de hacese de forma asíncrona:
+                         *)creat,  *)link,  *)unlink,  *)symlink, *)mkdir, *)rmdir, *)mknod and *)rename.
+
+
+
+    Creamos la carpeta que va a ser nuestro punto de montaje y montamos nuestro sistema de archivos 
+
+       > mkdir /mnt/SA_ext3
+       > mount -L LABEL_ext3 -r /mnt/SA_ext3
+
+    
+

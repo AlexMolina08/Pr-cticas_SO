@@ -51,13 +51,38 @@ Crear SA
         /sbin/mkfs  /sbin/mkfs.cramfs  /sbin/mkfs.ext2  /sbin/mkfs.ext3  /sbin/mkfs.ext4  /sbin/mkfs.ext4dev
 
 
-2) mke2fs : Sirve para crear SA ext3  y ext4 , sus opciones son:
+2) mke2fs : Sirve para crear SA ext3  y ext4 , algunas opciones son:
 
         -L (nombre de la etiqueta)
         -t (tipo de sistema de archivos , ext3 o ext4)
         
     EJEMPLO:
         mke2fs -L LABEL_ext3 -t ext3 /dev/loop0
+
+
+3)tune2fs : Sirve para consultar un SA y modificar algunos parametros , algunas opciones son:
+
+        -l (listar por pantalla info del SA)
+        -c max-mount-counts <dispositivo > (cantidad de montajes a realizar sin comprobar consistencia SA)
+        -L label <dispositivo> (poner etiqueta al SA)
+
+
+
+-----------------------
+MONTAR SISTEMA DE ARCHIVOS
+----------------------
+    Nota.- La jerarquia de directorios proporciona un espacio de nombres para los archivos.
+
+    Montar un sistema de archivos es añadir una nueva rama al ESPACIO DE NOMBRES de la jerarquia de directorios. 
+    Tras hacer el montaje , toda la informacion del SA será visible en el espacio de nombres y se podran crear nuevos archivos y directorios.
+
+    Para montar un SA es necesario :
+
+        *) Indicar en qué directorio se montará (a partir de aqui , comienza la nueva rama del espacio de nombres)
+        *) Indicar el nombre del archivo especial que representa la partición (/dev/loop0  por ej. ; se suele usar la etiqueta en vez del nombre)
+
+
+  1)mount .- monta un sistema de archivos . 
 
 
 

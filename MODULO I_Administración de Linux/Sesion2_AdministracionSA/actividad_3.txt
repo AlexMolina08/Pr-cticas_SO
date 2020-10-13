@@ -1,0 +1,25 @@
+Actividad 2.3. Personalización de los metadatos del SA
+------------------------------------------------------------------------------------------------------------------
+Consultando el manual en línea para la orden tune2fs responde a las siguientes preguntas:
+
+(a) ¿Cómo podrías conseguir que en el siguiente arranque del sistema se ejecutara
+automáticamente e2fsck sin que se haya alcanzado el máximo número de montajes?
+
+(b) ¿Cómo podrías conseguir reservar para uso exclusivo de un usuario username un número de
+bloques del sistema de archivos?
+------------------------------------------------------------------------------------------------------------------
+
+
+a) Con la opción -C (que indica el numero de veces el sistema ha sido montado ) y poniendole un numero mayor que en la opcion -c max-mount-counts (que es el numero de veces que el sistema se monta sin ser comprobado). Nos lo dice la propia documentación :
+     -C mount-count
+              Set  the  number  of  times  the  filesystem  has  been  mounted.  If set to a greater value than the max-mount-counts parameter set by the -c option, e2fsck will check the filesystem at the next reboot.
+ 
+b) Con la opción -r (para reservar un numero de bloques concreto del SA) conjunto a la opción -u
+
+    EJEMPLO:
+        tune2fs -r 1000 -u alex
+
+    con esto reservamos 1000 bloques del sistema de archivos al usuario Alex
+
+
+
