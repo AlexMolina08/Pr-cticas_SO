@@ -1,0 +1,94 @@
+********************************************************************************************
+Actividad 3.1 Trabajo con llamadas de gestión y procesamiento sobre archivos regulares
+
+a) Consulta la llamada al sistema open en el manual en línea. Fíjate en el hecho de que puede
+usarse para abrir un archivo ya existente o para crear un nuevo archivo. 
+
+En el caso de la creación de un nuevo archivo tienes que entender correctamente la relación entre la máscara
+umask y el campo mode, que permite establecer los permisos del archivo. El argumento mode
+especifica los permisos a emplear si se crea un nuevo archivo. Es modificado por la máscara
+umask del proceso de la forma habitual: los permisos del fichero creado son (modo & ~umask).
+
+c) Mira la llamada al sistema close en el manual en línea.
+
+d) mira la llamada lseek fijandote en las posibilidades de especificacion del nuevo current_offset
+
+e) mira la llamada read fijandote en qel nº de Bytes que devuelve a la hora de leer desde un archivo y los posibles casos limite
+
+********************************************************************************************
+
+int open(const char *pathname, int flags, mode_t mode) :
+
+a)  - open abre el archivo especificado por *pathname. 
+    - Si pathname no existe y se ha especificado el flag O_CREAT se crea nuevo archivo
+    - mode : Los permisos de un archivo (si se crea al llamar a open) 
+
+b) Relacion umask y el campo mode :
+
+    - mode especifica los permisos a emplear si se crea un nuevo archivo.  
+    - umask del proceso cambia los permisos ( campo mode)
+
+c) Mira la llamada close en el manual
+
+
+     
+    int close(int fd);
+    
+        * fd : Descriptor de archivo
+
+
+        * Esta funcion cierra el descriptor de archivos 
+
+        * El fd tras la llamada ya no se refiere a ningun archivo y puede volver a ser utilizado
+
+        * devuelve 0 si se ha cerrado  y -1 si hay error
+
+d) mira la llamada lseek fijandote en las posibilidades de especificacion del nuevo current_offset
+
+    off_t lseek(int fd, off_t offset, int whence);
+
+    
+        * fd : descr. archivo
+        * offset : nueva posicion (Bytes)
+        * whence : establece como poner el nuevo offset :
+
+                * SEEK_SET  => La posicion es puesta a offset Bytes 
+                * SEEK_CURRENT => La posicion es la actual + offset Bytes
+                * SEEK_END => La posicion es el tam. archivo + offset Bytes
+
+
+        * El offset puede ponerse más alla del tam. del archivo , pero si se intenta escribir devolvera null ( '\0' )
+ 
+
+e) mira la llamada read fijandote en qel nº de Bytes que devuelve a la hora de leer desde un archivo y los posibles casos limite
+
+        
+    ssize_t read(int fd, void *buf, size_t count);
+
+        * count : nº Bytes que se quieren leer      
+
+        * read() intenta leer el archivo identificado con fd count Bytes 
+
+        * La operacion de read empieza en el el file_offset 
+
+        * devuelve el numero de bytes leidos
+
+        * si file_offset es el final del archivo ( o más allá ) devuelve 0
+
+
+f) mira la llamada write fijandote en que devuelve los bytes que ha escrito en el archivo
+
+    ssize_t write(int fd, const void *buf, size_t count);
+
+
+        * buf : buffer donde se coje lo que se va a escribir ( *buf dir. inicio )
+    
+        * count: nº bytes a escribir
+
+        * write comienza desde el file_offset
+
+        * si es exitoso , devuelve el nº de bytes escritos 
+
+        * si ha habido error ( count = 0 , se supera el tamaó de disco ... ) se vuelve 0 
+        
+        

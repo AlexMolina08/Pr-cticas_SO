@@ -1,0 +1,37 @@
+
+************************************************************
+                1. e/s Archivos Regulares
+************************************************************
+
+- Llamadas de e/s:
+    * open, 
+    * read, 
+    * write, 
+    * lseek 
+    * close
+
+- Descriptor de Archivo : Entero no negativo que identifica archivo para el kernel
+    
+    * 0 (STDIN_FILENO) : Entrada estandar 
+    * 1 (STDOUT_FILENO) : Salida estandar 
+    * 2 (STDERR_FILENO) : Salida de ERROR estandar
+
+
+- current_offset : Posicion actual de lectura/escritura en un archivo abierto
+
+    * Mide el nº de B desde el inicio
+    * Al abrir un archivo se inicialia a 0
+    * Se puede cambiar usando la llamada al sistema lseek
+
+
+
+
+
+
+
+
+************************************************************
+                2. 
+************************************************************
+
+
