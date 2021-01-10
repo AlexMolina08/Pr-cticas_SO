@@ -18,7 +18,7 @@ Probar tras la ejecuci�n del programa: $>cat archivo y $> od -c archivo
 #include<errno.h>
 
 char buf1[]="abcdefghij";
-char buf2[]="ABCDEFGHIJ\n";
+char buf2[]="ABCDEFGHIJ\n"; 
 
 int main(int argc, char *argv[])
 {
