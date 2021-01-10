@@ -1,0 +1,53 @@
+1 ) int open(const char *pathname, int flags, mode_t mode) 
+    
+    - mode especifica los permisos a emplear si se crea un nuevo archivo.  
+    - umask del proceso cambia los permisos ( campo mode)
+    - abre el archivo especificado por *pathname. 
+    - Si pathname no existe y se ha especificado el flag O_CREAT se crea nuevo archivo
+    - mode : Los permisos de un archivo (si se crea al llamar a open) 
+
+int close(int fd)
+
+
+2 ) off_t lseek(int fd, off_t offset, int whence);
+
+    
+        * fd : descr. archivo
+        * offset : nueva posicion (Bytes)
+        * whence : establece como poner el nuevo offset :
+
+                * SEEK_SET  => La posicion es puesta a offset Bytes 
+                * SEEK_CURRENT => La posicion es la actual + offset Bytes
+                * SEEK_END => La posicion es el tam. archivo + offset Bytes
+        
+        * El offset puede ponerse más alla del tam. del archivo , pero si se intenta escribir devolvera null ( '\0' )
+
+
+3 ) ssize_t read(int fd, void *buf, size_t count);
+
+        * count : nº Bytes que se quieren leer      
+
+        * read() intenta leer el archivo identificado con fd count Bytes 
+
+        * La operacion de read empieza en el el file_offset 
+
+        * devuelve el numero de bytes leidos
+
+        * si file_offset es el final del archivo ( o más allá ) devuelve 0
+
+
+
+
+4 ) ssize_t write(int fd, const void *buf, size_t count);
+
+
+        * buf : buffer donde se coje lo que se va a escribir ( *buf dir. inicio )
+    
+        * count: nº bytes a escribir
+
+        * write comienza desde el file_offset
+
+        * si es exitoso , devuelve el nº de bytes escritos 
+
+        * si ha habido error ( count = 0 , se supera el tamaó de disco ... ) se vuelve 0 
+
