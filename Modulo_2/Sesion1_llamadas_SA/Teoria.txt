@@ -31,10 +31,11 @@
 
 
 ************************************************************
-    2. METADATOS DE UN ARCHIVO
+                2. METADATOS DE UN ARCHIVO
 ************************************************************
 
 Tipos de archivos:
+------------------
 
     NOTA : Todos los dispositivos del sistema estan representados por archivos especiales de disp. 
     o bloques
@@ -59,6 +60,7 @@ Tipos de archivos:
 
 
 Estructura Stat: Contiene los metadatos de un archivo
+------------------------------------------------------
 
     struct stat {
         unsigned long st_blocks;  /*número de bloques asignados (de 512 B en 512 B) */
@@ -91,3 +93,75 @@ Estructura Stat: Contiene los metadatos de un archivo
                                   /* Modificado al escribir / poner informacion del inodo */
                                   /* ej: propietario , grupo , modo , etc*/
     };
+
+
+    MACROS PARA COMPROBAR TIPO DE FICHERO
+    -------------------------------------
+    
+        S_ISLNK(st_mode) Verdadero si es un enlace simbólico (soft)
+        S_ISREG(st_mode) Verdadero si es un archivo regular
+        S_ISDIR(st_mode) Verdadero si es un directorio
+        S_ISCHR(st_mode) Verdadero si es un dispositivo de caracteres
+        S_ISBLK(st_mode) Verdadero si es un dispositivo de bloques
+        S_ISFIFO(st_mode) Verdadero si es una cauce con nombre (FIFO)
+        S_ISSOCK(st_mode) Verdadero si es un socket
+
+
+    FLAGS DE STMODE
+    ---------------
+
+        S_IFMT	0170000	bit mask for the file type bit fields
+        S_IFSOCK	0140000	socket
+        S_IFLNK	0120000	symbolic link
+        S_IFREG	0100000	regular file
+        S_IFBLK	0060000	block device
+        S_IFDIR	0040000	directory
+        S_IFCHR	0020000	character device
+        S_IFIFO	0010000	FIFO
+        S_ISUID	0004000	set UID bit
+        S_ISGID	0002000	set-group-ID bit (see below)
+        S_ISVTX	0001000	sticky bit (see below)
+        S_IRWXU	00700	mask for file owner permissions
+        S_IRUSR	00400	owner has read permission
+        S_IWUSR	00200	owner has write permission
+        S_IXUSR	00100	owner has execute permission
+        S_IRWXG	00070	mask for group permissions
+        S_IRGRP	00040	group has read permission
+        S_IWGRP	00020	group has write permission
+        S_IXGRP	00010	group has execute permission
+        S_IRWXO	00007	mask for permissions for others (not in group)
+        S_IROTH	00004	others have read permission
+        S_IWOTH	00002	others have write permission
+        S_IXOTH	00001	others have execute permission
+
+        *) Ejemplo uso de flags (ej4): Comprobar si el archivo pasado es regular
+         
+        // var. atributos es el struct stat
+        // Hacemos AND lógico de los bits st_mode con los bits S_IFREG (bit a bit) 
+        // si sale 1 es que el bit está activo y por tanto es un archivo regular
+
+        if( atributos.st_mode & S_IFREG){ 
+                                      // 
+            printf("Es un archivo regular");
+        }else{
+            printf("No es un archivo regular");
+        }
+
+    PERMISO DE ACCESO A ARCHIVOS
+    ----------------------------
+
+        * Cada vez que queremos abrir cualquier tipo de archivo hay que disponer del 
+          permiso de ejecucion (Se suele llamar al bit de busqueda)
+       
+        *  Permiso lectura directorio permite leer nombre archivos en directorio
+
+        *  Permiso ejecución directorio permite pasar a través del directorio 
+
+        *  Se necesita permiso escritura y ejecucion para crear archivo en directorio
+
+        *  Si se usa O_TRUNC hace falta permiso de escritura
+
+        *  Para ejecutar un archivo este tiene que ser de tipo regular y tener permisos ejecucion
+           ( las ejecuciones se hacen con las funciones de la famila de exec )
+
+

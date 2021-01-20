@@ -1,0 +1,13 @@
+Actividad 3.2. Trabajo con llamadas al sistema de la familia stat.
+--------------------------------------------------------------------
+Consulta las llamadas al sistema stat y lstat para entender sus diferencias.
+***
+
+int stat(const char *pathname, struct stat *statbuf);
+
+    Devuelve info del archivo donde apunta pathname en statbuf
+
+int lstat(const char *pathname, struct stat *statbuf);
+
+    Idéntica a stat pero si pathname es un ENLACE SIMBÓLICO devuelve la información de a
+    lo que apunta, no del enlace simbólico.
