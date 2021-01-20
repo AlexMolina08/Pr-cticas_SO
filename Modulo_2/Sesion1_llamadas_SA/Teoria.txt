@@ -4,11 +4,11 @@
 ************************************************************
 
 - Llamadas de e/s:
-    * open, 
-    * read, 
-    * write, 
-    * lseek 
-    * close
+    * int open (const char *pathname, int flags, mode_t mode) 
+    * ssize_t read (int fd, void *buf, size_t count); 
+    * ssize_t write (int fd, const void *buf, size_t count); 
+    * off_t lseek (int fd, off_t offset, int whence);
+    * int close(int fd)
 
 - Descriptor de Archivo : Entero no negativo que identifica archivo para el kernel
     
@@ -31,7 +31,63 @@
 
 
 ************************************************************
-                2. 
+    2. METADATOS DE UN ARCHIVO
 ************************************************************
 
+Tipos de archivos:
 
+    NOTA : Todos los dispositivos del sistema estan representados por archivos especiales de disp. 
+    o bloques
+
+    1) Regular : Contiene cualquier tipo de archivo (binario / texto) responsabilidad del programa
+                su manipulación
+    
+    2) Directorio : Archivo que contiene 2 cosas:
+        
+        *) Nombres de otros archivos
+        *) Punteros a la info de esos archivos
+    
+    3) Archivo especial de dispositivo de caracteres
+
+    4) Archivo especial de dispositivo de bloques : Para representar discos duros , CDs , etc
+    
+    5) FIFO : Utilizado para la comunicación entre procesos(IPC)
+
+    6) Socket : Archivo usado para comunicación en red (o nodo) entre procesos. 
+
+    7) Enlace simbólico : Archivo que apunta a otro archivo
+
+
+Estructura Stat: Contiene los metadatos de un archivo
+
+    struct stat {
+        unsigned long st_blocks;  /*número de bloques asignados (de 512 B en 512 B) */
+
+        unsigned long st_blksize; /*tamaño bloque E/S preferido para el sistema de archivos*/
+
+        dev_t st_dev;             /* no de dispositivo (filesystem) */
+
+        dev_t st_rdev;            /* no de dispositivo para archivos especiales */
+
+        ino_t st_ino;             /* no de inodo */
+
+        mode_t st_mode;           /* tipo de archivo y mode (permisos) */
+
+        nlink_t st_nlink;         /* número de enlaces duros (hard) */
+
+        uid_t st_uid;             /* UID del usuario propietario (owner) */
+
+        gid_t st_gid;             /* GID del usuario propietario (owner) */
+
+        off_t st_size;            /* tamaño total en bytes para archivos regulares */
+
+        time_t st_atime;          /* hora último acceso */
+                                  /* MODIFICADO POR : mknod , utime , read , write , truncate*/
+
+        time_t st_mtime;          /* hora última modificación */
+                                  /* MODIFICADO POR : mknod , utime , write */
+
+        time_t st_ctime;          /* hora último cambio */
+                                  /* Modificado al escribir / poner informacion del inodo */
+                                  /* ej: propietario , grupo , modo , etc*/
+    };

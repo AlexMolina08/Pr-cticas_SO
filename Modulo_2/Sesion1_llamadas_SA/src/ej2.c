@@ -15,7 +15,7 @@ Devuelve un archivo salida.txt con el formato:
 
 
 
-COMPILAR CON : gcc -Wall -g -o bin/tarea2 src/tarea2.c 
+COMPILAR CON : gcc -Wall -g -o bin/ej2 src/ej2.c 
 
 */
 
@@ -85,7 +85,13 @@ int main(int argc, char *argv[])
 			else strcpy(tipoArchivo,"Tipo de archivo desconocido");
 			printf("%s\n",tipoArchivo);
 	
-		}	
+	}
+
+	// Abrimos archivo
+	// O_RDONLY : read only
+	// S_IRUSR :  00400 user has read permission
+
+
 	}
 
 	// Abrimos el archivo que queremos leer
@@ -95,7 +101,7 @@ int main(int argc, char *argv[])
 	}
 
 	// Abrimos / Creamos el archivo donde escribimos
-	if ( (fd_destino = open("resultados/ej2.txt",O_CREAT|O_RDWR,S_IRUSR|S_IWUSR)) < 0 ){
+	if ( (fd_destino = open("resultados/res_ej2.txt",O_CREAT|O_RDWR,S_IRUSR|S_IWUSR)) < 0 ){
 		printf("\nError %d en open  :",errno);
 		perror("\nError en open");
 	}
