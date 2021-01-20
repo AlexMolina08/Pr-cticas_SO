@@ -16,6 +16,8 @@ Probar tras la ejecuci�n del programa: $>cat archivo y $> od -c archivo
 #include<sys/stat.h>
 #include<fcntl.h>
 #include<errno.h>
+#include<string.h>
+
 
 char buf1[]="abcdefghij";
 char buf2[]="ABCDEFGHIJ\n"; 
