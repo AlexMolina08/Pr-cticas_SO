@@ -1,0 +1,89 @@
+
+
+************************************************************
+        1. Llamadas al sistema para permisos de archivos
+************************************************************
+
+    * 1.1 mode_t umask(mode_t mask);
+    --------------------------------                                               
+        - La funcion umask establece la máscara de usuario (umask) a mask & 777 
+          , por ejemplo si el arg mask = 002 (valor var. umask por defecto) :
+
+                --- --- --- (777)
+            AND
+                --- --- ---
+
+
+        - umask tiene 3 digitos, cada dígito representa un permiso que será eliminado
+          de los permisos asignados por defecto por linux cada vez que crea un archivo:
+
+        - read = 4 , write = 2 , execute = 1
+
+        - Permisos iniciales que umask prohibirá :
+            0	niguno
+            1	x prohibido
+            2	w prohibido
+            3	wx prohibido 
+            4	r prohibido
+            5	rx prohibido
+            6	rw prohibido
+            7	todos prohibidos
+
+        - Permisos asignados por linux por defecto a 
+            directorios : 777 (rwxrwxrwx)
+            archivos : 666 (rw-rw-rw-)
+
+        - Ejemplo : establecer permisos iniciales con user con 
+        permisos de lectura y ejecucion others sin permisos y
+        group solo con permiso de escritura:
+
+                    $ umask 431
+                    $ >ejemplo2 (creacion nuevo archivo)
+                    $ ls-l ejemplo2
+                       -w- r-- rw- 1 alex alex 0 ene 21 21:02 ejemplo3
+
+
+    * 1.2 chmod y fchmod :
+    --------------------
+        int chmod(const char *pathname, mode_t mode);
+        int fchmod(int fd, mode_t mode);
+
+        - Cambian los permisos de un archivo existente.
+        - chmod => recibe archivo especificando su pathname
+        - fchmod => recibe archivo previamente abierto con open (usa el fd) 
+        
+        - devuelve 0 en caso de exito , -1 en caso de error (modifica errno)
+
+        - Los nuevos permisos especificados en arg mode , que es una máscara de bits
+          creada haciendo OR LÓGICO (union) de los siguientes valores:
+
+            +)S_ISUID  (04000)  el que ejecuta obtiene permisos coomo si fuese propietario del archivo    (ESPECIAL)
+            +)S_ISGID  (02000)  el gid del proceso que ejecuta el archivo obtiene permisos como si fuera el propietario del archivo   (ESPECIAL)
+            +)S_ISVTX  (01000)  Activar sticky bit. (un proceso no privilegiado no puede
+            eliminar o renombrar archivos del directorio a no ser que tenga permisos de escritura y sea propietario)
+            +)S_IRWXU  (00700) user permisos de rwx
+            +)S_IRUSR  (00400) user permiso de r
+            +)S_IWUSR  (00200) user tiene permisos 
+            +)S_IXUSR  (00100)  user tiene permiso x (ejecucion / busqueda)
+            +)S_IRWXG  (00070) group permisos de rwx
+            +)S_IRGRP  (00040)  group permiso de r
+            +)S_IWGRP  (00020)  group permiso de w
+            +)S_IXGRP  (00010)  group permiso de x
+            +)S_IRWXO  (00007)  others permisos de rwx
+            +)S_IROTH  (00004)  others permiso de r
+            +)S_IWOTH  (00002)  others permiso de 
+            +)S_IXOTH  (00001)  execute/search by others
+
+        
+
+
+          
+       
+
+ 
+
+
+
+
+        
+        
